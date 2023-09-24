@@ -42,12 +42,24 @@ func main() {
 		panic(err)
 	}
 
-	max := 0
+	top3 := [3]int{0, 0, 0}
+
 	for _, value := range res {
-		if value > max {
-			max = value
+		if value > top3[0] {
+			top3[1] = top3[0]
+			top3[0] = value
+		} else if value > top3[1] {
+			top3[2] = top3[1]
+			top3[1] = value
+		} else if value > top3[2] {
+			top3[2] = value
 		}
 	}
 
-	fmt.Println(max)
+	sum = 0
+	for _, calories := range top3 {
+		sum += calories
+	}
+
+	fmt.Println("total: ", top3, sum)
 }
